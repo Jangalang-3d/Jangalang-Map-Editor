@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jangalang Map Editor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="left">
+      <div class="canvas-wrap card">
+        <div class="row full-width justify-between align-center">
+          <div><strong>Map Canvas</strong> <span class="small">(click/drag to edit)</span></div>
+          <div class="small hint">Snap grid: <span id="gridLabel">32</span> px</div>
+        </div>
+        <canvas id="mapCanvas" width="800" height="800"></canvas>
+        <div class="row full-width justify-center">
+          <div class="small">Left-click: draw / place spawn · Right-click: erase</div>
+        </div>
+      </div>
+
+      <div class="card mt-8">
+        <div class="row justify-between align-center">
+          <div><strong>Preview</strong></div>
+          <div class="small hint">Live JSON</div>
+        </div>
+        <textarea id="jsonPreview" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="card">
+        <div><strong>Tools</strong></div>
+        <div class="tool-buttons mt-8">
+          <button id="toolDraw" class="active">Draw Wall</button>
+          <button id="toolSpawn">Spawn</button>
+          <button id="toolErase">Erase</button>
+          <button id="toolMove">Pan</button>
+        </div>
+        <div class="small mt-10">Tips: Click-drag to draw walls. Click to place spawn. Right-click to erase nearest wall.</div>
+      </div>
+
+      <div class="card">
+        <div><strong>Map / Grid</strong></div>
+        <div class="row mt-8">
+          <label for="gridSize">Grid size (px)</label>
+          <input id="gridSize" type="number" value="32" min="4" max="256" />
+        </div>
+        <div class="row mt-8">
+          <label for="canvasSize">Canvas size (px)</label>
+          <select id="canvasSize">
+            <option value="512">512×512</option>
+            <option value="640">640×640</option>
+            <option value="800" selected>800×800</option>
+            <option value="1024">1024×1024</option>
+          </select>
+        </div>
+        <div class="row mt-8">
+          <button id="clearBtn">Clear</button>
+          <button id="centerSpawn">Center Spawn</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div><strong>File</strong></div>
+        <div class="row mt-8">
+          <button id="exportBtn">Export JSON</button>
+          <button id="importBtn">Import JSON</button>
+          <input id="fileInput" type="file" accept=".json" />
+        </div>
+        <div class="small mt-8">Filename will be map.json by default.</div>
+      </div>
+
+      <div class="card">
+        <div><strong>Actions</strong></div>
+        <div class="row mt-8">
+          <button id="undoBtn">Undo</button>
+          <button id="redoBtn">Redo</button>
+        </div>
+      </div>
+
+      <div class="card small">
+        <div><strong>Format</strong></div>
+        <pre class="pre-format">{"spawn":[{"x":500,"y":500}],"walls":[{"x1":100,"y1":100,"x2":700,"y2":100},...]}</pre>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
